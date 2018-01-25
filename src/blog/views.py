@@ -9,6 +9,7 @@ from .models import PostModel
 # Create your views here.
 # CRUD (and list)
 # CREATE 
+# @login_required(login_url='/login')
 def post_model_create_view(request):
     # if request.method == 'POST':
     #     # print(request.POST)
@@ -62,6 +63,7 @@ def post_model_detail_view(request, id=None):
     return render(request, template, context)
 
 # UPDATE 
+# @login_required(login_url='/login')
 def post_model_update_view(request, id=None):
     obj = get_object_or_404(PostModel, id=id)
     form = PostModelForm(request.POST or None, instance=obj)
@@ -78,11 +80,12 @@ def post_model_update_view(request, id=None):
     else:
         print("invalid data")
    
-    template = "blog/create-view.html"
+    template = "blog/update-view.html"
     return render(request, template, context)
 
 
 # DELETE
+
 
 # LIST
 def post_model_list_view(request):
