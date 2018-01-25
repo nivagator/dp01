@@ -18,4 +18,8 @@ from .models import PostModel
 def post_model_list_view(request):
     qs = PostModel.objects.all()
     print(qs)
-    return HttpResponse("some data")
+    template_path = "list-view.html"
+    context = {}
+    return render(request, template_path, context)
+    # return HttpResponse("some data")
+
