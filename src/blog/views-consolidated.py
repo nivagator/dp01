@@ -10,6 +10,7 @@ from .models import PostModel
 # CRUD (and list)
 # CREATE 
 # @login_required(login_url='/login')
+def post_model_create_view(request):
     form = PostModelForm(request.POST or None)
     context = {
         "form": form,
@@ -28,15 +29,6 @@ from .models import PostModel
         print("invalid data")
    
     template = "blog/create-view.html"
-    return render(request, template, context)
-
-# RETRIEVE 
-def post_model_detail_view(request, id=None):
-    obj = get_object_or_404(PostModel, id=id)
-    context = {
-        "object": obj,
-        }
-    template = "blog/detail-view.html"
     return render(request, template, context)
 
 # UPDATE 
@@ -61,6 +53,25 @@ def post_model_update_view(request, id=None):
     return render(request, template, context)
 
 
+# RETRIEVE (detail) and LIST view
+def post_model_detail_view(request, id=None):
+    if id != None: 
+    # Detail View
+        obj = get_object_or_404(PostModel, id=id)
+        context = {
+            "object": obj,
+            }
+        template = "blog/detail-view.html"
+    else: 
+    # list view
+        qs = PostModel.objects.all()
+        context = {
+                "object_list": qs,
+            }
+        template = "blog/list-view.html"
+    return render(request, template, context)
+
+
 # DELETE
 def post_model_delete_view(request, id=None):
     # using detail view as a template here
@@ -75,11 +86,3 @@ def post_model_delete_view(request, id=None):
     template = "blog/delete-view.html"
     return render(request, template, context)
 
-# LIST
-def post_model_list_view(request):
-    qs = PostModel.objects.all()
-    context = {
-            "object_list": qs,
-        }
-    template = "blog/list-view.html"
-    return render(request, template, context)
