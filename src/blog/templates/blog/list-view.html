@@ -7,6 +7,13 @@
     <title>List View</title>
 </head>
 <body>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     <H1>Hello world!</H1>
     <ul>
         {% for object in object_list %}

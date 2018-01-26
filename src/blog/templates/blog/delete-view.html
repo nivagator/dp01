@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>delete view</title>
+</head>
+<body>
+    <h1>Delete {{ object.title }}</h1>
+    <form method="POST" action=".">{% csrf_token %}
+        Are you sure you want to delete this post?
+        <br/>
+        <input type="submit" value="yes">
+        <br>
+        <a href="/blog/{{ object.id }}">cancel</a>
+    </form>
+</body>
+</html>

@@ -85,7 +85,18 @@ def post_model_update_view(request, id=None):
 
 
 # DELETE
-
+def post_model_delete_view(request, id=None):
+    # using detail view as a template here
+    obj = get_object_or_404(PostModel, id=id)
+    if request.method == "POST":
+        obj.delete()
+        messages.success(request, "successfully deleted post")
+        return HttpResponseRedirect("/blog/")
+    context = {
+        "object": obj,
+        }
+    template = "blog/delete-view.html"
+    return render(request, template, context)
 
 # LIST
 def post_model_list_view(request):
